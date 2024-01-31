@@ -1,8 +1,12 @@
-const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
+
+// API Routes
+import userRoutes from './routes/user.route.js';
 
 const run = async () => {
   await mongoose.connect(
@@ -12,11 +16,11 @@ const run = async () => {
 };
 run().catch((err) => console.log(err));
 
-
-app.get('/',(req,res)=>{
-  res.send ('Server is OK')
-})
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+app.get('/', (req, res) => {
+  res.json({ message: 'API connection stablish successful ✔' });
+});
+app.use('/api/v1', userRoutes);
