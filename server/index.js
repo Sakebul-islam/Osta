@@ -2,11 +2,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
-const app = express();
 const port = process.env.PORT || 3000;
+
+const app = express();
+app.use(express.json());
 
 // API Routes
 import userRoutes from './routes/user.route.js';
+import authRoutes from './routes/auth.route.js';
 
 const run = async () => {
   await mongoose.connect(
@@ -24,3 +27,4 @@ app.get('/', (req, res) => {
   res.json({ message: 'API connection stablish successful ✔' });
 });
 app.use('/api/v1', userRoutes);
+app.use('/api/v1', authRoutes);
