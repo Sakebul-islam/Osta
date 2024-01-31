@@ -10,7 +10,7 @@ const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <Navbar className='border-b-2'>
+    <Navbar className='shadow-md'>
       <Link to='/'>
         <Logo />
       </Link>
@@ -31,7 +31,7 @@ const Header = () => {
           <FaMoon />
         </Button>
         <Link to='sign-in'>
-          <Button className='!rounded-sm p-0 sm:px-2 sm:py-0.5' gradientDuoTone='purpleToBlue'>
+          <Button className='' gradientDuoTone='purpleToBlue' outline>
             Sign In
           </Button>
         </Link>
@@ -39,17 +39,17 @@ const Header = () => {
       </div>
       <Navbar.Collapse>
         <Navbar.Link as='div' active={pathname === '/'}>
-          <Link className='block' to='/'>
+          <Link className='block font-semibold' to='/'>
             Home
           </Link>
         </Navbar.Link>
         <Navbar.Link as='div' active={pathname === '/about'}>
-          <Link className='block' to='/about'>
+          <Link className='block font-semibold' to='/about'>
             About
           </Link>
         </Navbar.Link>
         <Navbar.Link as='div' active={pathname === '/projects'}>
-          <Link className='block' to='/projects'>
+          <Link className='block font-semibold' to='/projects'>
             Projects
           </Link>
         </Navbar.Link>

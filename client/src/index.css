@@ -9,8 +9,7 @@ body {
     font-family: 'Jost', sans-serif;
 }
 
-input,
-button {
+input {
     border-radius: 2px !important;
     -webkit-border-radius: 2px !important;
     -moz-border-radius: 2px !important;
