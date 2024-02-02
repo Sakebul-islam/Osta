@@ -8,11 +8,23 @@ import { BiHide, BiShowAlt } from 'react-icons/bi';
 
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from '../redux/user/userSlice';
+
 const SignIn = () => {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState(null);
+  // const [loading, setLoading] = useState(false);
+
+  // redux
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((store) => store.user);
 
   const navigate = useNavigate();
 
@@ -23,11 +35,11 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrorMessage('Please fill out all fields.');
+      return dispatch(signInFailure('Please fill out all fields.'));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
+      // setErrorMessage(null);
       const res = await fetch('/api/v1/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -35,16 +47,16 @@ const SignIn = () => {
       });
       const data = await res.json();
       if (data.success === false) {
-        setLoading(false);
-        return setErrorMessage(data.message);
+        // setLoading(false);
+        dispatch(signInFailure(data.message));
       }
-      setLoading(false);
+      // setLoading(false);
       if (res.ok) {
+        dispatch(signInSuccess(data));
         navigate('/');
       }
     } catch (error) {
-      setLoading(false);
-      setErrorMessage(error.message);
+      dispatch(signInFailure(error.message));
     }
   };
   return (
@@ -112,9 +124,9 @@ const SignIn = () => {
               Sign Up
             </Link>
           </div>
-          {errorMessage && (
+          {error && (
             <Alert className='mt-5' color='failure'>
-              {errorMessage}
+              {error}
             </Alert>
           )}
         </div>
