@@ -4,7 +4,6 @@ import { errorHandler } from '../utils/error.js';
 
 export const signup = async (req, res, next) => {
   const { userName, email, password } = req.body;
-
   if (
     !userName ||
     !email ||
@@ -25,7 +24,7 @@ export const signup = async (req, res, next) => {
   });
   try {
     const result = await newUser.save();
-    res.send('Signup Successful');
+    res.json('Signup Successful');
   } catch (error) {
     next(error);
   }
