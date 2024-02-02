@@ -31,7 +31,11 @@ const Header = () => {
           <FaMoon />
         </Button>
         <Link to='sign-in'>
-          <Button className='' gradientDuoTone='purpleToBlue' outline>
+          <Button
+            className='hover:animate-pulse'
+            gradientDuoTone='purpleToBlue'
+            outline
+          >
             Sign In
           </Button>
         </Link>
@@ -39,17 +43,17 @@ const Header = () => {
       </div>
       <Navbar.Collapse>
         <Navbar.Link as='div' active={pathname === '/'}>
-          <Link className='block font-semibold' to='/'>
+          <Link className='block text-lg font-semibold' to='/'>
             Home
           </Link>
         </Navbar.Link>
         <Navbar.Link as='div' active={pathname === '/about'}>
-          <Link className='block font-semibold' to='/about'>
+          <Link className='block text-lg font-semibold' to='/about'>
             About
           </Link>
         </Navbar.Link>
         <Navbar.Link as='div' active={pathname === '/projects'}>
-          <Link className='block font-semibold' to='/projects'>
+          <Link className='block text-lg font-semibold' to='/projects'>
             Projects
           </Link>
         </Navbar.Link>
