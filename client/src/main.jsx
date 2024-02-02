@@ -8,14 +8,18 @@ import router from './routes/Routes.jsx';
 import { Toaster } from 'react-hot-toast';
 
 // Redux
+import { store, persistor } from './redux/store.js';
 import { Provider } from 'react-redux';
-import { store } from './redux/store.js';
+
+import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <PersistGate persistor={persistor}>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    </PersistGate>
     <Toaster />
   </React.StrictMode>
 );
