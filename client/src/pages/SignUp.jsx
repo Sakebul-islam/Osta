@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { BiHide, BiShowAlt } from 'react-icons/bi';
 
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
+import OAuth from '../components/OAuth';
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -114,6 +115,8 @@ const SignUp = () => {
                 'Sign Up'
               )}
             </Button>
+            <hr className='border-t-2' />
+            <OAuth />
           </form>
           <div className='flex gap-2 text-sm mt-5'>
             <span className=''>Have an account ?</span>
