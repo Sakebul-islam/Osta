@@ -1,14 +1,52 @@
 import { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import toast from 'react-hot-toast';
 
 import { BiHide, BiShowAlt } from 'react-icons/bi';
 
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.userName || !formData.email || !formData.password) {
+      return setErrorMessage('Please fill out all fields.');
+    }
+    try {
+      setLoading(true);
+      setErrorMessage(null);
+      const res = await fetch('/api/v1/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setLoading(false);
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if (res.ok) {
+        navigate('/sign-in');
+      }
+    } catch (error) {
+      setLoading(false);
+      setErrorMessage(error.message);
+    }
+  };
   return (
     <div className='min-h-screen mt-20 select-none'>
       <div className='flex flex-col md:flex-row md:items-center p-3 max-w-3xl mx-auto gap-5'>
@@ -25,14 +63,14 @@ const SignUp = () => {
 
         {/* right site */}
         <div className='flex-1'>
-          <form className='flex flex-col gap-4'>
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div className='flex flex-col gap-1'>
               <Label value='User Name' />
               <TextInput
-                id='username'
+                id='userName'
                 type='text'
                 placeholder='Username'
-                required
+                onChange={handleChange}
               />
             </div>
             <div className='flex flex-col gap-1'>
@@ -41,7 +79,7 @@ const SignUp = () => {
                 id='email'
                 type='email'
                 placeholder='example@email.com'
-                required
+                onChange={handleChange}
               />
             </div>
             <div className='flex flex-col gap-1'>
@@ -51,7 +89,7 @@ const SignUp = () => {
                   id='password'
                   type={show ? 'text' : 'password'}
                   placeholder='Password'
-                  required
+                  onChange={handleChange}
                 />
                 <span
                   className='absolute top-2/4 right-[1px] rounded-r-sm -translate-y-2/4 p-3 bg-gray-300 inline-block cursor-pointer'
@@ -65,8 +103,16 @@ const SignUp = () => {
               className='rounded-sm hover:animate-pulse'
               gradientDuoTone='purpleToPink'
               type='submit'
+              disabled={loading}
             >
-              Sign Up
+              {loading ? (
+                <>
+                  <Spinner size='sm' />
+                  <span className='pl-3'>Loading...</span>
+                </>
+              ) : (
+                'Sign Up'
+              )}
             </Button>
           </form>
           <div className='flex gap-2 text-sm mt-5'>
@@ -75,6 +121,11 @@ const SignUp = () => {
               Sign In
             </Link>
           </div>
+          {errorMessage && (
+            <Alert className='mt-5' color='failure'>
+              {errorMessage}
+            </Alert>
+          )}
         </div>
       </div>
     </div>
