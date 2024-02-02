@@ -22,7 +22,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.userName || !formData.email || !formData.password) {
+    if (!formData.username || !formData.email || !formData.password) {
       return setErrorMessage('Please fill out all fields.');
     }
     try {
@@ -67,7 +67,7 @@ const SignUp = () => {
             <div className='flex flex-col gap-1'>
               <Label value='User Name' />
               <TextInput
-                id='userName'
+                id='username'
                 type='text'
                 placeholder='Username'
                 onChange={handleChange}
