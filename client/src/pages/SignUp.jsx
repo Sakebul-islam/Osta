@@ -54,7 +54,7 @@ const SignUp = () => {
                   required
                 />
                 <span
-                  className='absolute top-2/4 right-[1px] rounded-r-sm -translate-y-2/4 p-3 bg-white inline-block cursor-pointer'
+                  className='absolute top-2/4 right-[1px] rounded-r-sm -translate-y-2/4 p-3 bg-gray-300 inline-block cursor-pointer'
                   onClick={() => setShow(!show)}
                 >
                   {show ? <BiShowAlt /> : <BiHide />}
