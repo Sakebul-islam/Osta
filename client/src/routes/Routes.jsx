@@ -6,6 +6,8 @@ import About from '../pages/About';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import DashboardSidebar from '../pages/Dashboard/DashboardSidebar';
+import DashboardProfile from '../pages/Dashboard/DashboardProfile';
 import Projects from '../pages/Projects';
 import ErrorPage from '../pages/ErrorPage';
 import PrivateRoute from './PrivateRoute';
@@ -33,12 +35,12 @@ const router = createBrowserRouter([
 
     children: [
       {
-        path: '/dashboard/dashboard',
+        path: '/dashboard',
         element: <Dashboard />,
       },
       {
         path: '/dashboard/profile',
-        element: <Dashboard />,
+        element: <DashboardProfile />,
       },
     ],
   },
