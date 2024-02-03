@@ -7,7 +7,6 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon } from 'react-icons/fa';
 import { MdOutlineWbSunny } from 'react-icons/md';
 
-
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 
@@ -39,7 +38,11 @@ const Header = () => {
           color='gray'
           onClick={() => dispatch(toggleTheme())}
         >
-          {theme === 'light'? <FaMoon /> : <MdOutlineWbSunny/>}
+          {theme === 'light' ? (
+            <FaMoon size={18} />
+          ) : (
+            <MdOutlineWbSunny size={20} />
+          )}
         </Button>
         {currentUser ? (
           <Dropdown
