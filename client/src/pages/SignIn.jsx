@@ -25,7 +25,7 @@ const SignIn = () => {
 
   // redux
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((store) => store.user);
+  const { loading, error } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 

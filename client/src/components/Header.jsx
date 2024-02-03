@@ -5,13 +5,17 @@ import Logo from './Logo';
 // icons
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon } from 'react-icons/fa';
+import { MdOutlineWbSunny } from 'react-icons/md';
 
-import { useSelector } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from '../redux/theme/themeSlice';
 
 const Header = () => {
   const { pathname } = useLocation();
+  const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser);
+  const dispatch = useDispatch();
   return (
     <Navbar className='shadow-md'>
       <Link to='/'>
@@ -30,8 +34,12 @@ const Header = () => {
         <AiOutlineSearch />
       </Button>
       <div className='flex items-center gap-2 md:order-2'>
-        <Button className='w-9 sm:w-12 h-8 sm:h-10 !rounded-sm' color='gray'>
-          <FaMoon />
+        <Button
+          className='w-9 sm:w-12 h-8 sm:h-10 !rounded-sm'
+          color='gray'
+          onClick={() => dispatch(toggleTheme())}
+        >
+          {theme === 'light'? <FaMoon /> : <MdOutlineWbSunny/>}
         </Button>
         {currentUser ? (
           <Dropdown
