@@ -8,6 +8,7 @@ import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Projects from '../pages/Projects';
 import ErrorPage from '../pages/ErrorPage';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -24,11 +25,19 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
 
     children: [
       {
         path: '/dashboard/dashboard',
+        element: <Dashboard />,
+      },
+      {
+        path: '/dashboard/profile',
         element: <Dashboard />,
       },
     ],
