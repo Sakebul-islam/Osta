@@ -41,7 +41,7 @@ const SignIn = () => {
     try {
       dispatch(signInStart());
       // setErrorMessage(null);
-      const res = await fetch('/api/v1/signin', {
+      const res = await fetch('/api/v1/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

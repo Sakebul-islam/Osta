@@ -17,7 +17,7 @@ const OAuth = () => {
     provider.setCustomParameters({ prompt: 'select_account' });
     try {
       const resultFromGoogle = await signInWithPopup(auth, provider);
-      const res = await fetch('/api/v1/google', {
+      const res = await fetch('/api/v1/auth/google', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
