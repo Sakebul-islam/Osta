@@ -14,9 +14,9 @@ import {
   updateStart,
   updateSuccess,
   updateFailure,
-  // deleteUserStart,
-  // deleteUserSuccess,
-  // deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
   // signoutSuccess,
 } from '../../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
@@ -131,23 +131,23 @@ const DashboardProfile = () => {
       setUpdateUserError(error.message);
     }
   };
-  // const handleDeleteUser = async () => {
-  //   setShowModal(false);
-  //   try {
-  //     dispatch(deleteUserStart());
-  //     const res = await fetch(`/api/v1/user/delete/${currentUser._id}`, {
-  //       method: 'DELETE',
-  //     });
-  //     const data = await res.json();
-  //     if (!res.ok) {
-  //       dispatch(deleteUserFailure(data.message));
-  //     } else {
-  //       dispatch(deleteUserSuccess(data));
-  //     }
-  //   } catch (error) {
-  //     dispatch(deleteUserFailure(error.message));
-  //   }
-  // };
+  const handleDeleteUser = async () => {
+    setShowModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/v1/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
 
   // const handleSignout = async () => {
   //   try {
@@ -234,9 +234,9 @@ const DashboardProfile = () => {
           onChange={handleChange}
         />
         <Button
+          className='hover:animate-pulse'
           type='submit'
           gradientDuoTone='purpleToBlue'
-          outline
           disabled={loading || imageFileUploading}
         >
           {loading ? 'Loading...' : 'Update'}
@@ -279,17 +279,28 @@ const DashboardProfile = () => {
         onClose={() => setShowModal(false)}
         popup
         size='md'
+        className=''
       >
-        <Modal.Header />
-        <Modal.Body>
+        <Modal.Header className='' />
+        <Modal.Body className=''>
           <div className='text-center'>
             <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
               Are you sure you want to delete your account?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure'>Yes, I'm sure</Button>
-              <Button color='gray' onClick={() => setShowModal(false)}>
+              <Button
+                className='rounded-sm'
+                color='failure'
+                onClick={handleDeleteUser}
+              >
+                Yes, I'm sure
+              </Button>
+              <Button
+                className='rounded-sm'
+                color='gray'
+                onClick={() => setShowModal(false)}
+              >
                 No, cancel
               </Button>
             </div>
