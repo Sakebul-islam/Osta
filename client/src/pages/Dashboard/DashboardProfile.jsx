@@ -17,8 +17,9 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-  // signoutSuccess,
+  signoutSuccess,
 } from '../../redux/user/userSlice';
+import useSignout from '../../hooks/useSignout';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
@@ -36,6 +37,8 @@ const DashboardProfile = () => {
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
+  const handleSignout = useSignout();
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -149,21 +152,6 @@ const DashboardProfile = () => {
     }
   };
 
-  // const handleSignout = async () => {
-  //   try {
-  //     const res = await fetch('/api/v1/user/signout', {
-  //       method: 'POST',
-  //     });
-  //     const data = await res.json();
-  //     if (!res.ok) {
-  //       console.log(data.message);
-  //     } else {
-  //       dispatch(signoutSuccess());
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
       <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
@@ -257,7 +245,9 @@ const DashboardProfile = () => {
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>
           Delete Account
         </span>
-        <span className='cursor-pointer'>Sign Out</span>
+        <span onClick={handleSignout} className='cursor-pointer'>
+          Sign Out
+        </span>
       </div>
       {updateUserSuccess && (
         <Alert color='success' className='mt-5'>

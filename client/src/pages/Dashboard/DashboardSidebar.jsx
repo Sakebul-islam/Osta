@@ -4,10 +4,13 @@ import { HiArrowSmRight, HiUser } from 'react-icons/hi';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 import { Link, useLocation } from 'react-router-dom';
+import useSignout from '../../hooks/useSignout';
 
 const DashboardSidebar = () => {
   const location = useLocation();
   const path = location.pathname;
+  const handleSignout = useSignout();
+
   return (
     <Sidebar className='w-full md:w-64'>
       <Sidebar.Items className='h-full'>
@@ -37,7 +40,12 @@ const DashboardSidebar = () => {
             </Link>
           </div>
           <Link to='/dashboard/profile'>
-            <Sidebar.Item as='div' icon={HiArrowSmRight} className='rounded-sm'>
+            <Sidebar.Item
+              onClick={handleSignout}
+              as='div'
+              icon={HiArrowSmRight}
+              className='rounded-sm'
+            >
               Sign Out
             </Sidebar.Item>
           </Link>

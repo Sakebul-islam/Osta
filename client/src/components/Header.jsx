@@ -9,12 +9,31 @@ import { MdOutlineWbSunny } from 'react-icons/md';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
+import useSignout from '../hooks/useSignout';
+// import { signoutSuccess } from '../redux/user/userSlice';
 
 const Header = () => {
   const { pathname } = useLocation();
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const handleSignout = useSignout();
+
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch('/api/v1/user/signout', {
+  //       method: 'POST',
+  //     });
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
   return (
     <Navbar className='shadow-md'>
       <Link to='/'>
@@ -64,7 +83,7 @@ const Header = () => {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to='/sign-in'>
