@@ -61,3 +61,11 @@ export const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const signoutUser = async (req, res, next) => {
+  try {
+    res.clearCoo('access_token').status(200).json('User has been signed out');
+  } catch (error) {
+    next(error);
+  }
+};
