@@ -17,7 +17,6 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-  signoutSuccess,
 } from '../../redux/user/userSlice';
 import useSignout from '../../hooks/useSignout';
 import { useDispatch } from 'react-redux';
@@ -222,7 +221,7 @@ const DashboardProfile = () => {
           onChange={handleChange}
         />
         <Button
-          className='hover:animate-pulse'
+          className='hover:animate-pulse rounded-sm'
           type='submit'
           gradientDuoTone='purpleToBlue'
           disabled={loading || imageFileUploading}
@@ -234,7 +233,7 @@ const DashboardProfile = () => {
             <Button
               type='button'
               gradientDuoTone='purpleToPink'
-              className='w-full'
+              className='w-full rounded-sm hover:animate-pulse'
             >
               Create a post
             </Button>

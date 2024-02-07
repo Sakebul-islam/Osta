@@ -6,6 +6,7 @@
 
 
 body {
+    height: 100vh;
     font-family: 'Jost', sans-serif;
 }
 
@@ -15,4 +16,8 @@ input {
     -moz-border-radius: 2px !important;
     -ms-border-radius: 2px !important;
     -o-border-radius: 2px !important;
+}
+
+.ql-editor {
+    font-size: 1.05rem;
 }

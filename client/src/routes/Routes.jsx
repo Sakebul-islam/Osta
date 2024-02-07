@@ -6,11 +6,12 @@ import About from '../pages/About';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard/Dashboard';
-import DashboardSidebar from '../pages/Dashboard/DashboardSidebar';
 import DashboardProfile from '../pages/Dashboard/DashboardProfile';
 import Projects from '../pages/Projects';
 import ErrorPage from '../pages/ErrorPage';
 import PrivateRoute from './PrivateRoute';
+import AdminPrivateRoute from './AdminPrivateRoute';
+import CreatePost from '../pages/CreatePost';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/about', element: <About /> },
       { path: '/projects', element: <Projects /> },
+      {
+        path: '/create-post',
+        element: (
+          <AdminPrivateRoute>
+            <CreatePost />
+          </AdminPrivateRoute>
+        ),
+      },
       { path: '/sign-in', element: <SignIn /> },
       { path: '/sign-up', element: <SignUp /> },
     ],
