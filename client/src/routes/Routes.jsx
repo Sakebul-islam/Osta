@@ -12,6 +12,7 @@ import ErrorPage from '../pages/ErrorPage';
 import PrivateRoute from './PrivateRoute';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import CreatePost from '../pages/CreatePost';
+import PostPage from '../pages/PostPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/about', element: <About /> },
       { path: '/projects', element: <Projects /> },
+      { path: '/post/:postSlug', element: <PostPage /> },
       {
         path: '/create-post',
         element: (
