@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import CreatePost from '../pages/CreatePost';
 import PostPage from '../pages/PostPage';
+import DashboardPost from '../pages/Dashboard/DashboardPost';
 
 const router = createBrowserRouter([
   {
@@ -24,14 +25,7 @@ const router = createBrowserRouter([
       { path: '/about', element: <About /> },
       { path: '/projects', element: <Projects /> },
       { path: '/post/:postSlug', element: <PostPage /> },
-      {
-        path: '/create-post',
-        element: (
-          <AdminPrivateRoute>
-            <CreatePost />
-          </AdminPrivateRoute>
-        ),
-      },
+
       { path: '/sign-in', element: <SignIn /> },
       { path: '/sign-up', element: <SignUp /> },
     ],
@@ -48,6 +42,22 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: '/dashboard/create-post',
+        element: (
+          <AdminPrivateRoute>
+            <CreatePost />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/posts',
+        element: (
+          <AdminPrivateRoute>
+            <DashboardPost />
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: '/dashboard/profile',
