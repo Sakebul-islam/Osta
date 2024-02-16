@@ -28,18 +28,6 @@ const DashboardSidebar = () => {
                 Dashboard
               </Sidebar.Item>
             </Link>
-            {currentUser?.isAdmin && (
-              <Link to='/dashboard/posts'>
-                <Sidebar.Item
-                  as='div'
-                  active={path === '/posts'}
-                  icon={HiDocumentText}
-                  className='rounded-sm'
-                >
-                  Posts
-                </Sidebar.Item>
-              </Link>
-            )}
             <Link to='/dashboard/profile'>
               <Sidebar.Item
                 as='div'
@@ -52,6 +40,18 @@ const DashboardSidebar = () => {
                 Profile
               </Sidebar.Item>
             </Link>
+            {currentUser?.isAdmin && (
+              <Link to='/dashboard/posts'>
+                <Sidebar.Item
+                  as='div'
+                  active={path === '/posts'}
+                  icon={HiDocumentText}
+                  className='rounded-sm'
+                >
+                  Posts
+                </Sidebar.Item>
+              </Link>
+            )}
           </div>
           <Link to='/dashboard/profile'>
             <Sidebar.Item
