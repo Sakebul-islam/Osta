@@ -5,6 +5,8 @@ import { Modal, Table, Button, TableRow } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { MdOutlineDeleteForever } from 'react-icons/md';
+import { FaRegEdit } from 'react-icons/fa';
 
 const DashboardPost = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -115,16 +117,20 @@ const DashboardPost = () => {
                       {post?.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.category}</Table.Cell>
+                  <Table.Cell className='text-center'>
+                    <span className='px-3 border rounded-full bg-green-500 text-white'>
+                      {post.category}
+                    </span>
+                  </Table.Cell>
                   <Table.Cell>
                     <span
+                      className='flex place-content-center font-medium text-red-500 hover:underline cursor-pointer'
                       onClick={() => {
                         setShowModal(true);
                         setPostIdToDelete(post._id);
                       }}
-                      className='font-medium text-red-500 hover:underline cursor-pointer'
                     >
-                      Delete
+                      <MdOutlineDeleteForever size={25} />
                     </span>
                   </Table.Cell>
                   <Table.Cell className='!rounded-none'>
@@ -132,7 +138,9 @@ const DashboardPost = () => {
                       className='text-teal-500 hover:underline'
                       to={`/update-post/${post._id}`}
                     >
-                      <span>Edit</span>
+                      <span>
+                        <FaRegEdit size={23} />
+                      </span>
                     </Link>
                   </Table.Cell>
                 </TableRow>
@@ -158,7 +166,7 @@ const DashboardPost = () => {
         size='md'
       >
         <div>
-          <Modal.Header/>
+          <Modal.Header />
           <Modal.Body>
             <div className='text-center'>
               <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
