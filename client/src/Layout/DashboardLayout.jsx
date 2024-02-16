@@ -11,7 +11,7 @@ const DashboardLayout = () => {
         <div className='w-full md:w-64'>
           <DashboardSidebar />
         </div>
-        <div className='w-full'>
+        <div className='w-full overflow-hidden'>
           <Outlet />
         </div>
       </div>

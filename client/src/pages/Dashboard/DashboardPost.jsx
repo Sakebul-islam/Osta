@@ -83,13 +83,15 @@ const DashboardPost = () => {
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>
-              <Table.HeadCell className='!rounded-none'>
+              <Table.HeadCell className='!rounded-none truncate'>
                 Date updated
               </Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+              <Table.HeadCell className='truncate'>Post image</Table.HeadCell>
+              <Table.HeadCell className='truncate min-w-52'>
+                Post title
+              </Table.HeadCell>
+              <Table.HeadCell className='truncate'>Category</Table.HeadCell>
+              <Table.HeadCell className='truncate'>Delete</Table.HeadCell>
               <Table.HeadCell className='!rounded-none'>
                 <span>Edit</span>
               </Table.HeadCell>
