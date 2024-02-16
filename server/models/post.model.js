@@ -4,6 +4,11 @@ const postSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
     content: { type: String, required: true },
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     image: {
       type: String,
       default:
@@ -12,7 +17,7 @@ const postSchema = new mongoose.Schema(
     category: { type: String, default: 'uncategorized' },
     slug: { type: String, required: true, unique: true },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 const Post = mongoose.model('Post', postSchema);
