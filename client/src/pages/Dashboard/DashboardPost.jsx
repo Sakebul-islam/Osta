@@ -159,7 +159,9 @@ const DashboardPost = () => {
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <div className='min-h-[50vh] flex justify-center items-center'>
+          <p className='font-bold text-2xl'>You have no posts yet!</p>
+        </div>
       )}
       <Modal
         show={showModal}
