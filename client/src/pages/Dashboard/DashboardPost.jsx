@@ -138,7 +138,7 @@ const DashboardPost = () => {
                   <Table.Cell className='!rounded-none'>
                     <Link
                       className='text-teal-500 hover:underline'
-                      to={`/update-post/${post._id}`}
+                      to={`/dashboard/update-post/${post._id}`}
                     >
                       <span>
                         <FaRegEdit size={23} />

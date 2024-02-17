@@ -14,6 +14,7 @@ import AdminPrivateRoute from './AdminPrivateRoute';
 import CreatePost from '../pages/CreatePost';
 import PostPage from '../pages/PostPage';
 import DashboardPost from '../pages/Dashboard/DashboardPost';
+import UpdatePost from '../pages/UpdatePost';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
         element: (
           <AdminPrivateRoute>
             <DashboardPost />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/update-post/:postId',
+        element: (
+          <AdminPrivateRoute>
+            <UpdatePost />
           </AdminPrivateRoute>
         ),
       },
