@@ -1,6 +1,11 @@
 import { Sidebar } from 'flowbite-react';
 
-import { HiArrowSmRight, HiDocumentText, HiUser } from 'react-icons/hi';
+import {
+  HiArrowSmRight,
+  HiDocumentText,
+  HiUser,
+  HiOutlineUserGroup,
+} from 'react-icons/hi';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -10,7 +15,7 @@ import { useSelector } from 'react-redux';
 const DashboardSidebar = () => {
   const { currentUser } = useSelector((state) => state.user);
   const location = useLocation();
-  const path = location.pathname;
+  const path = location.pathname.split('/').pop();
   const handleSignout = useSignout();
 
   return (
@@ -21,7 +26,7 @@ const DashboardSidebar = () => {
             <Link to='/dashboard'>
               <Sidebar.Item
                 as='div'
-                active={path === '/dashboard'}
+                active={path === 'dashboard'}
                 icon={MdOutlineDashboardCustomize}
                 className='rounded-sm'
               >
@@ -31,7 +36,7 @@ const DashboardSidebar = () => {
             <Link to='/dashboard/profile'>
               <Sidebar.Item
                 as='div'
-                active={path === '/dashboard/profile'}
+                active={path === 'profile'}
                 icon={HiUser}
                 label={currentUser?.isAdmin ? 'Admin' : 'User'}
                 labelColor='dark'
@@ -44,11 +49,23 @@ const DashboardSidebar = () => {
               <Link to='/dashboard/posts'>
                 <Sidebar.Item
                   as='div'
-                  active={path === '/posts'}
+                  active={path === 'posts'}
                   icon={HiDocumentText}
                   className='rounded-sm'
                 >
                   Posts
+                </Sidebar.Item>
+              </Link>
+            )}
+            {currentUser?.isAdmin && (
+              <Link to='/dashboard/users'>
+                <Sidebar.Item
+                  as='div'
+                  active={path === 'users'}
+                  icon={HiOutlineUserGroup}
+                  className='rounded-sm'
+                >
+                  Users
                 </Sidebar.Item>
               </Link>
             )}
