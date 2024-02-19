@@ -14,6 +14,7 @@ app.use(cookieParser());
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 import postRoutes from './routes/post.route.js';
+import commentRoutes from './routes/comment.route.js';
 
 const run = async () => {
   await mongoose.connect(
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/post', postRoutes);
+app.use('/api/v1/comment', commentRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

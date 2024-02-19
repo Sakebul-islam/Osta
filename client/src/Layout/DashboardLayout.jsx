@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 import FooterCom from '../components/FooterCom';
 import DashboardSidebar from '../pages/Dashboard/DashboardSidebar';
+import ScrollToTop from '../components/ScrollToTop';
 
 const DashboardLayout = () => {
   return (
@@ -13,6 +14,7 @@ const DashboardLayout = () => {
         </div>
         <div className='w-full overflow-hidden'>
           <Outlet />
+          <ScrollToTop />
         </div>
       </div>
       <FooterCom />
