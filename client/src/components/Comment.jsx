@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { BiSolidLike } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 
-const Comment = ({ comment, onLike, onEdit }) => {
+const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment?.content);
@@ -79,18 +79,20 @@ const Comment = ({ comment, onLike, onEdit }) => {
                 size='sm'
                 gradientDuoTone='purpleToBlue'
                 onClick={handleSave}
+                className='rounded-sm'
               >
                 Save
               </Button>
-              <Button
-                type='button'
-                size='sm'
-                gradientDuoTone='purpleToBlue'
-                outline
+
+              <button
                 onClick={() => setIsEditing(false)}
+                type='button'
+                className='group hover:animate-pulse flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white bg-gradient-to-br from-purple-600 to-cyan-500 enabled:hover:bg-gradient-to-bl focus:ring-cyan-300 dark:focus:ring-cyan-800 border-0 focus:ring-2 rounded-sm'
               >
-                Cancel
-              </Button>
+                <span className='items-center flex justify-center bg-white text-gray-900 transition-all duration-75 ease-in group-enabled:group-hover:bg-opacity-0 group-enabled:group-hover:text-inherit dark:bg-gray-900 dark:text-white w-full rounded-sm text-sm px-3 py-1.5 border border-transparent'>
+                  Cancel
+                </span>
+              </button>
             </div>
           </>
         ) : (
@@ -129,6 +131,13 @@ const Comment = ({ comment, onLike, onEdit }) => {
                       className='text-gray-400 hover:text-blue-500'
                     >
                       Edit
+                    </button>
+                    <button
+                      type='button'
+                      onClick={() => onDelete(comment._id)}
+                      className='text-gray-400 hover:text-red-500'
+                    >
+                      Delete
                     </button>
                   </>
                 )}
