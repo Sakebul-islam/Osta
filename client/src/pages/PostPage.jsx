@@ -6,12 +6,14 @@ import { Link, useParams } from 'react-router-dom';
 
 import CallToAction from '../components/CallToAction';
 import CommentSection from '../components/CommentSection';
+import PostCard from '../components/PostCard';
 
 const PostPage = () => {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
+  const [recentPosts, setRecentPosts] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -36,6 +38,21 @@ const PostPage = () => {
     };
     fetchPost();
   }, [postSlug]);
+
+  useEffect(() => {
+    try {
+      const fetchRecentPosts = async () => {
+        const res = await fetch(`/api/v1/post/getposts?limit=3`);
+        const data = await res.json();
+        if (res.ok) {
+          setRecentPosts(data.posts);
+        }
+      };
+      fetchRecentPosts();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
 
   if (loading)
     return (
@@ -76,6 +93,22 @@ const PostPage = () => {
         <CallToAction />
       </div>
       <CommentSection postId={post._id} />
+      <div className='mb-5'>
+        <hr className='border-t dark:border-gray-600' />
+
+        <h1 className='text-xl text-center my-4 relative after:absolute after:top-2/4 after:left-2/4 after:h-[.5px] after:w-3/4 md:after:w-2/4 after:-translate-x-2/4 after:-translate-y-2/4 after:bg-gray-300 dark:after:bg-gray-600'>
+          <span className='bg-gray-600 text-white z-50 relative py-1 p-2 rounded-sm'>
+            Recent articles
+          </span>
+        </h1>
+
+        <hr className='border-t dark:border-gray-600' />
+
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 justify-center'>
+          {recentPosts &&
+            recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
+        </div>
+      </div>
     </main>
   );
 };

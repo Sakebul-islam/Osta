@@ -82,18 +82,20 @@ input {
     color: red;
 }
 
+
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
     background-color: #000;
-    border-radius: 5px;
+
 }
 
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0px 0px 6px rgba(0, 0, 0, .3);
-    background-color: #f5f5f5;
+    background-color: #424242;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #444;
-    border-radius: 5px;
+    border-left: .5px solid #424242;
+    border-right: .5px solid #424242;
+    background-color: #7b7b7b;
 }
