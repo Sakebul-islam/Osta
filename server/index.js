@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 const port = process.env.PORT || 3000;
 
@@ -22,6 +23,8 @@ const run = async () => {
   );
   console.log('MongoBD is Connected');
 };
+
+const _dirname = path.resolve();
 run().catch((err) => console.log(err));
 
 app.listen(port, () => {
@@ -35,7 +38,10 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/comment', commentRoutes);
-
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) => {
+  res.sendFile(__dirname, 'client', 'dist', 'index.html');
+});
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
