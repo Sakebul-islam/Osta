@@ -17,6 +17,7 @@ import DashboardPost from '../pages/Dashboard/DashboardPost';
 import UpdatePost from '../pages/UpdatePost';
 import DashboardUsers from '../pages/Dashboard/DashboardUsers';
 import DashboardComments from '../pages/Dashboard/DashboardComments';
+import Search from '../components/Search';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/about', element: <About /> },
       { path: '/projects', element: <Projects /> },
+      { path: '/search', element: <Search /> },
       { path: '/post/:postSlug', element: <PostPage /> },
 
       { path: '/sign-in', element: <SignIn /> },

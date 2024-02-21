@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 // icons
@@ -10,42 +10,48 @@ import { MdOutlineWbSunny } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import useSignout from '../hooks/useSignout';
-// import { signoutSuccess } from '../redux/user/userSlice';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
   const { pathname } = useLocation();
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const handleSignout = useSignout();
 
-  // const handleSignout = async () => {
-  //   try {
-  //     const res = await fetch('/api/v1/user/signout', {
-  //       method: 'POST',
-  //     });
-  //     const data = await res.json();
-  //     if (!res.ok) {
-  //       console.log(data.message);
-  //     } else {
-  //       dispatch(signoutSuccess());
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
   return (
     <Navbar className='shadow-md'>
       <Link to='/'>
         <Logo />
       </Link>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           className='rounded-sm hidden lg:block'
           type='text'
           placeholder='Search...'
           rightIcon={AiOutlineSearch}
+          defaultValue={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
       <Button className='w-9 sm:w-12 h-8 sm:h-10 lg:hidden' color='gray' pill>
