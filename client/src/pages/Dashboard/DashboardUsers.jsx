@@ -103,12 +103,14 @@ const DashboardUsers = () => {
                   </Table.Cell>
                   <Table.Cell>{user?.username}</Table.Cell>
                   <Table.Cell className=''>{user.email}</Table.Cell>
-                  <Table.Cell className='!rounded-none lowercase flex justify-center items-center'>
-                    {user?.isAdmin ? (
-                      <FaCheck className='text-green-500' />
-                    ) : (
-                      <FaTimes className='text-red-500' />
-                    )}
+                  <Table.Cell className='!rounded-none lowercase !text-center'>
+                    <div className='flex justify-center items-center'>
+                      {user?.isAdmin ? (
+                        <FaCheck className='text-green-500' />
+                      ) : (
+                        <FaTimes className='text-red-500' />
+                      )}
+                    </div>
                   </Table.Cell>
                   <Table.Cell>
                     <span

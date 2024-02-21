@@ -5,6 +5,7 @@ import {
   HiDocumentText,
   HiUser,
   HiOutlineUserGroup,
+  HiAnnotation,
 } from 'react-icons/hi';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
@@ -66,6 +67,18 @@ const DashboardSidebar = () => {
                   className='rounded-sm'
                 >
                   Users
+                </Sidebar.Item>
+              </Link>
+            )}
+            {currentUser?.isAdmin && (
+              <Link to='/dashboard/comments'>
+                <Sidebar.Item
+                  as='div'
+                  active={path === 'comments'}
+                  icon={HiAnnotation}
+                  className='rounded-sm'
+                >
+                  Comments
                 </Sidebar.Item>
               </Link>
             )}
